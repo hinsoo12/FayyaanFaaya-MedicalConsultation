@@ -12,11 +12,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-lgipg1j76v_7r*e&gxd=p3sb9+i1k#w3pj_ew3r0v%m+x^_@57'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 AUTH_USER_MODEL = 'Accounts.User' # for getting acces of related name
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['fayyaan-faaya-consultation.herokuapp.com','127.0.0.1']
 
 
 # Application definition
@@ -46,6 +46,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',   # Allow Heroku to serve static files
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -80,14 +81,14 @@ WSGI_APPLICATION = 'FayyaanFaaya.wsgi.application'
 
 DATABASES = {
     'default': {
-        #'ENGINE': 'django.db.backends.sqlite3',
-        #'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
 
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME' : 'FayyaanFaayaDB1',
-        'USER' : 'postgres',
-        'PASSWORD' : 'root',
-        'HOST' : 'localhost'
+        #'ENGINE': 'django.db.backends.postgresql',
+        #'NAME' : 'FayyaanFaayaDB1',
+        #'USER' : 'postgres',
+        #'PASSWORD' : 'root',
+       # 'HOST' : 'localhost'
 
     }
 }
@@ -128,6 +129,8 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
+
+STATIC_ROOT = (os.path.join(BASE_DIR,'staticfiles'),)
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (os.path.join(BASE_DIR,'static'),)
